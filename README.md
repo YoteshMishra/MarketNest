@@ -163,10 +163,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Redux Toolkit for simplified state management
 - All the open-source contributors who made this project possible
 
-## 📞 Support
-
-For support, email support@marketnest.com or create an issue in this repository.
-
 ---
 
 **MarketNest** - Your Ultimate Shopping Destination 🛒
