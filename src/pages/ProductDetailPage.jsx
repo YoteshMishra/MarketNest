@@ -250,9 +250,9 @@ const ProductDetailPage = () => {
         </nav>
 
         {/* Main Product Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8 lg:mb-12">
           {/* Image Gallery */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Main Image */}
             <div className="relative bg-gray-100 rounded-lg overflow-hidden aspect-square">
               <img
@@ -266,29 +266,29 @@ const ProductDetailPage = () => {
                 <>
                   <button
                     onClick={() => handleImageNavigation('prev')}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 sm:p-2 rounded-full shadow-md transition-colors touch-manipulation"
                   >
-                    <ChevronLeftIcon className="h-5 w-5" />
+                    <ChevronLeftIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                   <button
                     onClick={() => handleImageNavigation('next')}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition-colors"
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 sm:p-2 rounded-full shadow-md transition-colors touch-manipulation"
                   >
-                    <ChevronRightIcon className="h-5 w-5" />
+                    <ChevronRightIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </>
               )}
 
               {/* Discount Badge */}
               {currentProduct.originalPrice && currentProduct.originalPrice > currentProduct.price && (
-                <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-red-500 text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold">
                   {Math.round(((currentProduct.originalPrice - currentProduct.price) / currentProduct.originalPrice) * 100)}% OFF
                 </div>
               )}
 
               {/* New Badge */}
               {currentProduct.isNew && (
-                <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-green-500 text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold">
                   NEW
                 </div>
               )}
@@ -296,12 +296,12 @@ const ProductDetailPage = () => {
 
             {/* Thumbnail Images */}
             {currentProduct.images.length > 1 && (
-              <div className="flex space-x-2 overflow-x-auto">
+              <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
                 {currentProduct.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}
-                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+                    className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-colors touch-manipulation ${
                       selectedImageIndex === index ? 'border-blue-500' : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -317,20 +317,20 @@ const ProductDetailPage = () => {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Title and Brand */}
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-blue-600 font-medium">{currentProduct.brand}</span>
                 <button
                   onClick={handleShare}
-                  className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="p-2 text-gray-400 hover:text-gray-600 transition-colors touch-manipulation"
                   title="Share product"
                 >
                   <ShareIcon className="h-5 w-5" />
                 </button>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{currentProduct.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 leading-tight">{currentProduct.name}</h1>
 
               {/* Rating */}
               <div className="flex items-center space-x-2 mb-4">
@@ -338,7 +338,7 @@ const ProductDetailPage = () => {
                   {[...Array(5)].map((_, i) => (
                     <StarSolidIcon
                       key={i}
-                      className={`h-5 w-5 ${i < Math.floor(currentProduct.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      className={`h-4 w-4 sm:h-5 sm:w-5 ${i < Math.floor(currentProduct.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
                     />
                   ))}
                 </div>
@@ -349,10 +349,10 @@ const ProductDetailPage = () => {
             </div>
 
             {/* Price */}
-            <div className="flex items-center space-x-3">
-              <span className="text-3xl font-bold text-gray-900">${currentProduct.price}</span>
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900">${currentProduct.price}</span>
               {currentProduct.originalPrice && currentProduct.originalPrice > currentProduct.price && (
-                <span className="text-xl text-gray-500 line-through">${currentProduct.originalPrice}</span>
+                <span className="text-lg sm:text-xl text-gray-500 line-through">${currentProduct.originalPrice}</span>
               )}
             </div>
 
@@ -360,20 +360,20 @@ const ProductDetailPage = () => {
             <div className="flex items-center space-x-2">
               {currentProduct.inStock ? (
                 <>
-                  <CheckIcon className="h-5 w-5 text-green-500" />
-                  <span className="text-green-600 font-medium">In Stock ({currentProduct.stockQuantity} available)</span>
+                  <CheckIcon className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
+                  <span className="text-green-600 font-medium text-sm sm:text-base">In Stock ({currentProduct.stockQuantity} available)</span>
                 </>
               ) : (
                 <>
-                  <XMarkIcon className="h-5 w-5 text-red-500" />
-                  <span className="text-red-600 font-medium">Out of Stock</span>
+                  <XMarkIcon className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
+                  <span className="text-red-600 font-medium text-sm sm:text-base">Out of Stock</span>
                 </>
               )}
             </div>
 
             {/* Description */}
             <div>
-              <p className="text-gray-700 leading-relaxed">{currentProduct.description}</p>
+              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{currentProduct.description}</p>
             </div>
 
             {/* Product Options */}
@@ -388,7 +388,7 @@ const ProductDetailPage = () => {
                         <button
                           key={size}
                           onClick={() => setSelectedSize(size)}
-                          className={`px-4 py-2 border rounded-lg text-sm font-medium transition-colors ${
+                          className={`px-3 sm:px-4 py-2 border rounded-lg text-sm font-medium transition-colors touch-manipulation ${
                             selectedSize === size
                               ? 'border-blue-500 bg-blue-50 text-blue-700'
                               : 'border-gray-300 text-gray-700 hover:border-gray-400'
@@ -410,7 +410,7 @@ const ProductDetailPage = () => {
                         <button
                           key={color}
                           onClick={() => setSelectedColor(color)}
-                          className={`px-4 py-2 border rounded-lg text-sm font-medium capitalize transition-colors ${
+                          className={`px-3 sm:px-4 py-2 border rounded-lg text-sm font-medium capitalize transition-colors touch-manipulation ${
                             selectedColor === color
                               ? 'border-blue-500 bg-blue-50 text-blue-700'
                               : 'border-gray-300 text-gray-700 hover:border-gray-400'
@@ -433,32 +433,32 @@ const ProductDetailPage = () => {
                   <button
                     onClick={() => handleQuantityChange(-1)}
                     disabled={quantity <= 1}
-                    className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed"
+                    className="p-2.5 sm:p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed touch-manipulation"
                   >
                     <MinusIcon className="h-4 w-4" />
                   </button>
-                  <span className="px-4 py-2 text-gray-900 font-medium">{quantity}</span>
+                  <span className="px-3 sm:px-4 py-2 text-gray-900 font-medium min-w-[3rem] text-center">{quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(1)}
                     disabled={quantity >= (currentProduct.stockQuantity || 1)}
-                    className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed"
+                    className="p-2.5 sm:p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed touch-manipulation"
                   >
                     <PlusIcon className="h-4 w-4" />
                   </button>
                 </div>
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 hidden sm:inline">
                   {currentProduct.stockQuantity} available
                 </span>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-4">
-              <div className="flex space-x-4">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
                 <button
                   onClick={handleAddToCart}
                   disabled={!currentProduct.inStock}
-                  className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+                  className="flex-1 bg-blue-600 text-white py-3 px-4 sm:px-6 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 touch-manipulation"
                 >
                   <ShoppingCartIcon className="h-5 w-5" />
                   <span>{isInCart ? 'Update Cart' : 'Add to Cart'}</span>
@@ -466,18 +466,21 @@ const ProductDetailPage = () => {
 
                 <button
                   onClick={handleToggleWishlist}
-                  className={`p-3 border rounded-lg transition-colors ${
+                  className={`p-3 border rounded-lg transition-colors touch-manipulation sm:flex-shrink-0 ${
                     isInWishlist
                       ? 'border-red-300 bg-red-50 text-red-600 hover:bg-red-100'
                       : 'border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800'
                   }`}
                   title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
                 >
-                  {isInWishlist ? (
-                    <HeartSolidIcon className="h-5 w-5" />
-                  ) : (
-                    <HeartIcon className="h-5 w-5" />
-                  )}
+                  <div className="flex items-center justify-center space-x-2">
+                    {isInWishlist ? (
+                      <HeartSolidIcon className="h-5 w-5" />
+                    ) : (
+                      <HeartIcon className="h-5 w-5" />
+                    )}
+                    <span className="sm:hidden">{isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}</span>
+                  </div>
                 </button>
               </div>
 

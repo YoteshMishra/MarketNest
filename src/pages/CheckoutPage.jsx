@@ -491,11 +491,11 @@ const CheckoutPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm">
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {/* Step 1: Shipping Address */}
                 {currentStep === 1 && (
                   <div>
@@ -508,18 +508,18 @@ const CheckoutPage = () => {
                       {/* Contact Information */}
                       <div>
                         <h3 className="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:gap-6">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Full Name *
                             </label>
                             <div className="relative">
-                              <UserIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                              <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
                                 type="text"
                                 value={shippingAddress.name}
                                 onChange={(e) => handleShippingAddressChange('name', e.target.value)}
-                                className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                                className={`w-full pl-10 pr-3 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${
                                   errors.name ? 'border-red-500' : 'border-gray-300'
                                 }`}
                                 placeholder="Enter your full name"
@@ -533,12 +533,12 @@ const CheckoutPage = () => {
                               Email Address *
                             </label>
                             <div className="relative">
-                              <EnvelopeIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                              <EnvelopeIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
                                 type="email"
                                 value={shippingAddress.email}
                                 onChange={(e) => handleShippingAddressChange('email', e.target.value)}
-                                className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                                className={`w-full pl-10 pr-3 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${
                                   errors.email ? 'border-red-500' : 'border-gray-300'
                                 }`}
                                 placeholder="Enter your email"
@@ -552,12 +552,12 @@ const CheckoutPage = () => {
                               Phone Number *
                             </label>
                             <div className="relative">
-                              <PhoneIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                              <PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
                                 type="tel"
                                 value={shippingAddress.phone}
                                 onChange={(e) => handleShippingAddressChange('phone', e.target.value)}
-                                className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                                className={`w-full pl-10 pr-3 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${
                                   errors.phone ? 'border-red-500' : 'border-gray-300'
                                 }`}
                                 placeholder="Enter your phone number"

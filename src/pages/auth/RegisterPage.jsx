@@ -60,8 +60,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div>
           <div className="flex justify-center">
             <div className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-2xl">
@@ -82,8 +82,8 @@ const RegisterPage = () => {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
+        <form className="mt-6 sm:mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-4 sm:space-y-6">
             {/* Name Field */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -103,7 +103,7 @@ const RegisterPage = () => {
                 })}
                 type="text"
                 autoComplete="name"
-                className={`mt-1 input-field ${errors.name ? 'border-red-500' : ''}`}
+                className={`mt-1 w-full px-3 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                 placeholder="Enter your full name"
               />
               {errors.name && (

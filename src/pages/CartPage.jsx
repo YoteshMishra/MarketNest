@@ -235,24 +235,24 @@ const CartPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm">
-              <div className="p-6">
-                <div className="space-y-6">
+              <div className="p-4 sm:p-6">
+                <div className="space-y-4 sm:space-y-6">
                   {items.map((item) => {
                     const isInWishlist = wishlistItems.some(wishItem => wishItem.id === item.id);
 
                     return (
-                      <div key={`${item.id}-${item.size || ''}-${item.color || ''}`} className="flex items-start space-x-4 py-6 border-b border-gray-200 last:border-b-0">
+                      <div key={`${item.id}-${item.size || ''}-${item.color || ''}`} className="flex items-start space-x-3 sm:space-x-4 py-4 sm:py-6 border-b border-gray-200 last:border-b-0">
                         {/* Product Image */}
                         <div className="flex-shrink-0">
                           <Link to={`/product/${item.id}`}>
                             <img
                               src={item.image}
                               alt={item.name}
-                              className="w-24 h-24 object-cover rounded-lg hover:opacity-75 transition-opacity"
+                              className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg hover:opacity-75 transition-opacity"
                             />
                           </Link>
                         </div>
@@ -260,17 +260,17 @@ const CartPage = () => {
                         {/* Product Details */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between">
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                               <Link
                                 to={`/product/${item.id}`}
-                                className="text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors"
+                                className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2"
                               >
                                 {item.name}
                               </Link>
 
                               {/* Product Options */}
                               {(item.size || item.color) && (
-                                <div className="flex items-center space-x-4 mt-1 text-sm text-gray-600">
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mt-1 text-sm text-gray-600">
                                   {item.size && <span>Size: {item.size}</span>}
                                   {item.color && <span>Color: {item.color}</span>}
                                 </div>
@@ -287,7 +287,7 @@ const CartPage = () => {
                             {/* Remove Button */}
                             <button
                               onClick={() => handleRemoveItem(item.id)}
-                              className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                              className="p-2 text-gray-400 hover:text-red-600 transition-colors touch-manipulation ml-2"
                               title="Remove item"
                             >
                               <TrashIcon className="h-5 w-5" />
@@ -295,14 +295,14 @@ const CartPage = () => {
                           </div>
 
                           {/* Price and Quantity Controls */}
-                          <div className="flex items-center justify-between mt-4">
-                            <div className="flex items-center space-x-3">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-3 sm:mt-4 space-y-3 sm:space-y-0">
+                            <div className="flex items-center space-x-2 sm:space-x-3">
                               {/* Quantity Controls */}
                               <div className="flex items-center border border-gray-300 rounded-lg">
                                 <button
                                   onClick={() => handleDecreaseQuantity(item.id)}
                                   disabled={item.quantity <= 1}
-                                  className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+                                  className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors touch-manipulation"
                                 >
                                   <MinusIcon className="h-4 w-4" />
                                 </button>
@@ -312,12 +312,12 @@ const CartPage = () => {
                                   max={item.maxQuantity || 99}
                                   value={item.quantity}
                                   onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value) || 1)}
-                                  className="w-16 px-2 py-2 text-center border-0 focus:ring-0 focus:outline-none"
+                                  className="w-12 sm:w-16 px-1 sm:px-2 py-2 text-center border-0 focus:ring-0 focus:outline-none text-sm sm:text-base"
                                 />
                                 <button
                                   onClick={() => handleIncreaseQuantity(item.id)}
                                   disabled={item.maxQuantity && item.quantity >= item.maxQuantity}
-                                  className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+                                  className="p-2 text-gray-600 hover:text-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors touch-manipulation"
                                 >
                                   <PlusIcon className="h-4 w-4" />
                                 </button>
@@ -326,7 +326,7 @@ const CartPage = () => {
                               {/* Move to Wishlist */}
                               <button
                                 onClick={() => handleMoveToWishlist(item)}
-                                className="inline-flex items-center px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+                                className="inline-flex items-center px-2 sm:px-3 py-2 text-xs sm:text-sm text-gray-600 hover:text-gray-800 transition-colors touch-manipulation"
                                 title="Move to wishlist"
                               >
                                 {isInWishlist ? (
@@ -334,16 +334,17 @@ const CartPage = () => {
                                 ) : (
                                   <HeartIcon className="h-4 w-4 mr-1" />
                                 )}
-                                Save for later
+                                <span className="hidden sm:inline">Save for later</span>
+                                <span className="sm:hidden">Save</span>
                               </button>
                             </div>
 
                             {/* Price */}
                             <div className="text-right">
-                              <div className="text-lg font-semibold text-gray-900">
+                              <div className="text-base sm:text-lg font-semibold text-gray-900">
                                 ${(item.price * item.quantity).toFixed(2)}
                               </div>
-                              <div className="text-sm text-gray-600">
+                              <div className="text-xs sm:text-sm text-gray-600">
                                 ${item.price.toFixed(2)} each
                               </div>
                             </div>
@@ -359,28 +360,28 @@ const CartPage = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm sticky top-8">
-              <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+            <div className="bg-white rounded-lg shadow-sm lg:sticky lg:top-8">
+              <div className="p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Order Summary</h2>
 
                 {/* Discount Code */}
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Discount Code
                   </label>
-                  <div className="flex space-x-2">
+                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                     <input
                       type="text"
                       value={discountCode}
                       onChange={(e) => setDiscountCode(e.target.value)}
                       placeholder="Enter code"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="flex-1 px-3 py-2.5 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm"
                       disabled={isApplyingDiscount}
                     />
                     <button
                       onClick={handleApplyDiscount}
                       disabled={isApplyingDiscount || !discountCode.trim()}
-                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="px-4 py-2.5 sm:py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation text-sm font-medium"
                     >
                       {isApplyingDiscount ? 'Applying...' : 'Apply'}
                     </button>
@@ -398,7 +399,7 @@ const CartPage = () => {
                         </div>
                         <button
                           onClick={handleRemoveDiscount}
-                          className="text-green-600 hover:text-green-800 transition-colors"
+                          className="text-green-600 hover:text-green-800 transition-colors touch-manipulation p-1"
                         >
                           <TrashIcon className="h-4 w-4" />
                         </button>
@@ -452,10 +453,10 @@ const CartPage = () => {
 
                 {/* Free Shipping Progress */}
                 {finalAmount < 50 && (
-                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <div className="flex items-center mb-2">
-                      <TruckIcon className="h-5 w-5 text-blue-600 mr-2" />
-                      <span className="text-sm font-medium text-blue-800">
+                      <TruckIcon className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mr-2" />
+                      <span className="text-xs sm:text-sm font-medium text-blue-800">
                         Add ${(50 - finalAmount).toFixed(2)} more for FREE shipping!
                       </span>
                     </div>
@@ -471,7 +472,7 @@ const CartPage = () => {
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors mb-4"
+                  className="w-full bg-blue-600 text-white py-3.5 sm:py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors mb-4 touch-manipulation text-base sm:text-sm"
                 >
                   <div className="flex items-center justify-center">
                     <CreditCardIcon className="h-5 w-5 mr-2" />
@@ -480,7 +481,7 @@ const CartPage = () => {
                 </button>
 
                 {/* Security Features */}
-                <div className="space-y-2 text-sm text-gray-600">
+                <div className="space-y-2 text-xs sm:text-sm text-gray-600">
                   <div className="flex items-center">
                     <ShieldCheckIcon className="h-4 w-4 mr-2 text-green-600" />
                     <span>Secure checkout</span>

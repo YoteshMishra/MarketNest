@@ -257,26 +257,26 @@ const ProductsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
             {filters.category ? `${filters.category} Products` : 'All Products'}
           </h1>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="mb-6">
-            <div className="relative max-w-md">
+          <form onSubmit={handleSearch} className="mb-4 sm:mb-6">
+            <div className="relative max-w-full sm:max-w-md">
               <input
                 type="text"
                 value={localSearchQuery}
                 onChange={(e) => setLocalSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 touch-manipulation"
               >
                 <MagnifyingGlassIcon className="h-4 w-4" />
               </button>
@@ -284,18 +284,18 @@ const ProductsPage = () => {
           </form>
 
           {/* Filters and Sort Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto pb-2 sm:pb-0">
               {/* Filter Toggle */}
               <button
                 onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap touch-manipulation"
               >
-                <FunnelIcon className="h-5 w-5" />
-                Filters
+                <FunnelIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-sm sm:text-base">Filters</span>
                 {(filters.category || filters.brand || filters.rating > 0 ||
                   filters.priceRange[0] > 0 || filters.priceRange[1] < 1000) && (
-                  <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                  <span className="bg-blue-600 text-white text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
                     Active
                   </span>
                 )}
@@ -306,66 +306,73 @@ const ProductsPage = () => {
                 filters.priceRange[0] > 0 || filters.priceRange[1] < 1000 || searchQuery) && (
                 <button
                   onClick={handleResetFilters}
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium whitespace-nowrap touch-manipulation"
                 >
                   Clear All
                 </button>
               )}
-
-              {/* Results Count */}
-              <span className="text-gray-600 text-sm">
-                {loading ? 'Loading...' : `${pagination.totalProducts} products found`}
-              </span>
             </div>
 
-            <div className="flex items-center gap-4">
-              {/* Sort Dropdown */}
-              <select
-                value={`${filters.sortBy}-${filters.sortOrder}`}
-                onChange={(e) => {
-                  const [sortBy, sortOrder] = e.target.value.split('-');
-                  handleSortChange(sortBy, sortOrder);
-                }}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {sortOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+            {/* Results Count - Mobile: Full width, Desktop: Right side */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <span className="text-gray-600 text-sm order-2 sm:order-1">
+                {loading ? 'Loading...' : `${pagination.totalProducts} products found`}
+              </span>
 
-              {/* View Mode Toggle */}
-              <div className="flex border border-gray-300 rounded-lg overflow-hidden">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+              <div className="flex items-center gap-2 sm:gap-4 order-1 sm:order-2">
+                {/* Sort Dropdown */}
+                <select
+                  value={`${filters.sortBy}-${filters.sortOrder}`}
+                  onChange={(e) => {
+                    const [sortBy, sortOrder] = e.target.value.split('-');
+                    handleSortChange(sortBy, sortOrder);
+                  }}
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm flex-1 sm:flex-none"
                 >
-                  <Squares2X2Icon className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
-                >
-                  <ListBulletIcon className="h-5 w-5" />
-                </button>
+                  {sortOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                {/* View Mode Toggle - Hidden on mobile */}
+                <div className="hidden sm:flex border border-gray-300 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 touch-manipulation ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                  >
+                    <Squares2X2Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 touch-manipulation ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                  >
+                    <ListBulletIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex gap-8">
-          {/* Filters Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
+          {/* Filters Sidebar - Mobile: Full width overlay, Desktop: Sidebar */}
           <div className={`${isFiltersOpen ? 'block' : 'hidden'} lg:block w-full lg:w-64 flex-shrink-0`}>
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+            {/* Mobile Overlay */}
+            {isFiltersOpen && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={() => setIsFiltersOpen(false)} />
+            )}
+
+            <div className={`bg-white rounded-lg shadow-sm p-4 sm:p-6 ${isFiltersOpen ? 'fixed inset-x-4 top-4 bottom-4 z-50 overflow-y-auto lg:relative lg:inset-auto lg:z-auto lg:overflow-visible' : 'lg:sticky lg:top-4'}`}>
               <div className="flex items-center justify-between mb-4 lg:hidden">
                 <h3 className="text-lg font-semibold">Filters</h3>
                 <button
                   onClick={() => setIsFiltersOpen(false)}
-                  className="p-1 hover:bg-gray-100 rounded"
+                  className="p-2 hover:bg-gray-100 rounded touch-manipulation"
                 >
-                  <XMarkIcon className="h-5 w-5" />
+                  <XMarkIcon className="h-6 w-6" />
                 </button>
               </div>
 
@@ -518,13 +525,13 @@ const ProductsPage = () => {
           {/* Products Grid/List */}
           <div className="flex-1">
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-lg shadow-sm p-4 animate-pulse">
-                    <div className="bg-gray-300 h-48 rounded mb-4"></div>
-                    <div className="bg-gray-300 h-4 rounded mb-2"></div>
-                    <div className="bg-gray-300 h-4 rounded w-2/3 mb-2"></div>
-                    <div className="bg-gray-300 h-4 rounded w-1/3"></div>
+                  <div key={i} className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-pulse">
+                    <div className="bg-gray-300 h-40 sm:h-48 rounded mb-3 sm:mb-4"></div>
+                    <div className="bg-gray-300 h-3 sm:h-4 rounded mb-2"></div>
+                    <div className="bg-gray-300 h-3 sm:h-4 rounded w-2/3 mb-2"></div>
+                    <div className="bg-gray-300 h-3 sm:h-4 rounded w-1/3"></div>
                   </div>
                 ))}
               </div>
@@ -557,46 +564,46 @@ const ProductsPage = () => {
                   <>
                     {/* Products Grid */}
                     {viewMode === 'grid' ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {products.map(product => (
-                      <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+                      <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
                         <div className="relative">
                           <Link to={`/product/${product.id}`}>
                             <img
                               src={product.images[0]}
                               alt={product.name}
-                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                              className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           </Link>
 
                           {/* Wishlist Button */}
                           <button
                             onClick={() => handleToggleWishlist(product)}
-                            className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors"
+                            className="absolute top-2 right-2 p-1.5 sm:p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors touch-manipulation"
                           >
                             {wishlistItems.some(item => item.id === product.id) ? (
-                              <HeartSolidIcon className="h-5 w-5 text-red-500" />
+                              <HeartSolidIcon className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
                             ) : (
-                              <HeartIcon className="h-5 w-5 text-gray-400" />
+                              <HeartIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                             )}
                           </button>
 
                           {/* Discount Badge */}
                           {product.originalPrice && product.originalPrice > product.price && (
-                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-semibold">
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm font-semibold">
                               {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                             </div>
                           )}
                         </div>
 
-                        <div className="p-4">
+                        <div className="p-3 sm:p-4">
                           <Link to={`/product/${product.id}`}>
-                            <h3 className="font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors line-clamp-2">
+                            <h3 className="font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors line-clamp-2 text-sm sm:text-base">
                               {product.name}
                             </h3>
                           </Link>
 
-                          <p className="text-gray-600 text-sm mb-2 line-clamp-2">
+                          <p className="text-gray-600 text-xs sm:text-sm mb-2 line-clamp-2 hidden sm:block">
                             {product.description}
                           </p>
 
@@ -606,37 +613,38 @@ const ProductsPage = () => {
                               {[...Array(5)].map((_, i) => (
                                 <StarIcon
                                   key={i}
-                                  className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                                  className={`h-3 w-3 sm:h-4 sm:w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
                                 />
                               ))}
                             </div>
-                            <span className="ml-1 text-sm text-gray-600">
+                            <span className="ml-1 text-xs sm:text-sm text-gray-600">
                               ({product.reviewCount || 0})
                             </span>
                           </div>
 
                           {/* Price */}
                           <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                              <span className="text-lg font-bold text-gray-900">
+                            <div className="flex items-center gap-1 sm:gap-2">
+                              <span className="text-base sm:text-lg font-bold text-gray-900">
                                 ${product.price}
                               </span>
                               {product.originalPrice && product.originalPrice > product.price && (
-                                <span className="text-sm text-gray-500 line-through">
+                                <span className="text-xs sm:text-sm text-gray-500 line-through">
                                   ${product.originalPrice}
                                 </span>
                               )}
                             </div>
-                            <span className="text-sm text-gray-600">{product.brand}</span>
+                            <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">{product.brand}</span>
                           </div>
 
                           {/* Add to Cart Button */}
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                            className="w-full bg-blue-600 text-white py-2.5 sm:py-2 px-3 sm:px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base font-medium touch-manipulation"
                           >
                             <ShoppingCartIcon className="h-4 w-4" />
-                            Add to Cart
+                            <span className="hidden sm:inline">Add to Cart</span>
+                            <span className="sm:hidden">Add</span>
                           </button>
                         </div>
                       </div>

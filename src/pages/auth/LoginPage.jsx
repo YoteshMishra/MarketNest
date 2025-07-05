@@ -57,8 +57,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div>
           <div className="flex justify-center">
             <div className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-2xl">
@@ -79,8 +79,8 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
+        <form className="mt-6 sm:mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-4 sm:space-y-6">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -96,7 +96,7 @@ const LoginPage = () => {
                 })}
                 type="email"
                 autoComplete="email"
-                className={`mt-1 input-field ${errors.email ? 'border-red-500' : ''}`}
+                className={`mt-1 w-full px-3 py-3 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -120,12 +120,12 @@ const LoginPage = () => {
                   })}
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
-                  className={`input-field pr-10 ${errors.password ? 'border-red-500' : ''}`}
+                  className={`w-full px-3 py-3 sm:py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base sm:text-sm ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center touch-manipulation"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -142,13 +142,13 @@ const LoginPage = () => {
           </div>
 
           {/* Remember me and Forgot password */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
             <div className="flex items-center">
               <input
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded touch-manipulation"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                 Remember me
@@ -158,7 +158,7 @@ const LoginPage = () => {
             <div className="text-sm">
               <Link
                 to="/forgot-password"
-                className="font-medium text-primary-600 hover:text-primary-500"
+                className="font-medium text-blue-600 hover:text-blue-500 touch-manipulation"
               >
                 Forgot your password?
               </Link>
@@ -170,7 +170,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-3 sm:py-2 px-4 border border-transparent text-base sm:text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             >
               {loading ? (
                 <div className="flex items-center">
